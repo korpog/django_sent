@@ -1,4 +1,5 @@
 import numpy as np
+import re
 import torch
 import torch.nn as nn
 
@@ -46,3 +47,31 @@ class LSTM_NN(nn.Module):
                          self.hidden_dim)).to(device)
         hidden = (h0, c0)
         return hidden
+    
+def preprocess_string(s):
+    # remove non-word characters, whitespaces and digits
+    re.sub(r"[^\w\s]", '', s)
+    re.sub(r"[\s+]", '', s)
+    re.sub(r"[\d]", '', s)
+
+    return s
+
+def padding(sentences, length):
+    features = np.zeros((len(sentences), length), dtype=int)
+    for i, review in enumerate(sentences):
+        if len(review) != 0:
+            features[i, -len(review):] = np.array(review)[:length]
+    return features
+
+def predict_text(text, model, vocab):
+        word_seq = np.array([vocab[preprocess_string(word)] for word in text.split()
+                         if preprocess_string(word) in vocab.keys()])
+        word_seq = np.expand_dims(word_seq,axis=0)
+        pad =  torch.from_numpy(padding(word_seq,500))
+        inputs = pad.to(device)
+        batch_size = 1
+        h = model.init_hidden(batch_size)
+        h = tuple([each.data for each in h])
+        output, h = model(inputs, h)
+        outcome = "positive" if output.item() > 0.5 else "negative"
+        return outcome

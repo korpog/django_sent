@@ -1,6 +1,16 @@
 {% extends "./base.html" %}
 
 {% block content %}
-<h1>HELLO THERE</h1>
+<form action="/your-name/" method="post">
+  {% csrf_token %}
+  <div class="mb-1">
+    <label for="inputReview" class="form-label">Enter a movie review</label>
+    <textarea class="form-control bg-body-tertiary" id="reviewTextarea" rows="5"></textarea>
+  </div>
+  <div id="textInfo" class="form-text pb-2">
+    Your text must not be longer than 500 characters.
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
 {% endblock %}
