@@ -1,10 +1,11 @@
 {% extends "./base.html" %}
 
 {% block content %}
-<div>
-    <h2 class="text-center p-3">According to my model the sentiment of this review: </h2>
-    <p class="text-center p-2"><i>{{text}}</i></p>
-    <h2 class="text-center p-3">is <b>{{prediction}}</b></h2>
+<div class="text-center mb-2">
+    <h2 class="p-3">According to my model the sentiment of this review: </h2>
+    <p class="p-2"><i>{{text}}</i></p>
+    <h2 class="p-3">is <b>{{prediction}}</b></h2>
 </div>
+<a class="btn btn-primary" href="{% url 'sentiment:index' %}">Go Back</a>
 
 {% endblock %}

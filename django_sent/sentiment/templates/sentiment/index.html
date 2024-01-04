@@ -1,16 +1,28 @@
 {% extends "./base.html" %} {% block content %}
+<p>
+  This LSTM-based neural network was trained on the
+  <a
+    href="https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews"
+    >IMDb dataset</a
+  >
+  containing 50000 reviews.
+</p>
 <form action="/result/" method="post">
   {% csrf_token %}
   <div class="mb-1">
-    <label for="inputReview" class="form-label">Enter a movie review in English</label>
+    <label for="inputReview" class="form-label"
+      >Enter a movie review in English</label
+    >
     <textarea
       class="form-control bg-body-tertiary mb-2"
       id="reviewTextarea"
       name="review"
       rows="5"
+      maxlength="2500"
       required
     ></textarea>
-  <button type="submit" class="btn btn-primary">Submit</button>
+    <div id="textHelp" class="form-text mb-2">Text longer than 2500 characters will be cut off.</div>
+    <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </form>
 
