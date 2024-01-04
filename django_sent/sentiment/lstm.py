@@ -40,7 +40,7 @@ class LSTM_NN(nn.Module):
         return sig_out, hidden
 
     def init_hidden(self, batch_size):
-        # Create two new tensors with sizes n_layers x batch_size x hidden_dim
+        # create two new tensors with sizes n_layers x batch_size x hidden_dim
         h0 = torch.zeros((self.no_layers, batch_size,
                          self.hidden_dim)).to(device)
         c0 = torch.zeros((self.no_layers, batch_size,

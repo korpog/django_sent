@@ -1,16 +1,17 @@
-{% extends "./base.html" %}
-
-{% block content %}
-<form action="/your-name/" method="post">
+{% extends "./base.html" %} {% block content %}
+<form action="/result/" method="post">
   {% csrf_token %}
   <div class="mb-1">
-    <label for="inputReview" class="form-label">Enter a movie review</label>
-    <textarea class="form-control bg-body-tertiary" id="reviewTextarea" rows="5"></textarea>
-  </div>
-  <div id="textInfo" class="form-text pb-2">
-    Your text must not be longer than 500 characters.
-  </div>
+    <label for="inputReview" class="form-label">Enter a movie review in English</label>
+    <textarea
+      class="form-control bg-body-tertiary mb-2"
+      id="reviewTextarea"
+      name="review"
+      rows="5"
+      required
+    ></textarea>
   <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
 </form>
 
 {% endblock %}
